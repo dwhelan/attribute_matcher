@@ -1,3 +1,5 @@
+[![Gem Version](https://badge.fury.io/rb/have_attribute_matcher.png)](http://badge.fury.io/rb/have_attribute_matcher)
+
 # Have Attribute Matcher
 
 An RSpec matcher for validating attributes.
