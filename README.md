@@ -1,5 +1,6 @@
 [![Gem Version](https://badge.fury.io/rb/have_attribute_matcher.png)](http://badge.fury.io/rb/have_attribute_matcher)
 [![Build Status](https://travis-ci.org/dwhelan/have_attribute_matcher.png?branch=master)](https://travis-ci.org/dwhelan/have_attribute_matcher)
+[![Code Climate](https://codeclimate.com/github/dwhelan/have_attribute_matcher/badges/gpa.svg)](https://codeclimate.com/github/dwhelan/have_attribute_matcher)
 
 # Have Attribute Matcher
 
