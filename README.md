@@ -20,47 +20,36 @@ Or install it yourself as:
 
 ## Usage
 
-### Entities
-You can create entities which have a built-in 'id' attribute which uniquely identifies the entity.
-
 ```ruby
-require 'have_attribute_matcher'
-
-
 class Person
-  include Pad.entity
+  attr_accessor :name
+  attr_reader   :age
+  attr_writer   :status
 
-  attribute :name
-  attribute :age
+  protected
+
+  attr_accessor :address
+
+  private
+
+  attr_accessor :ssn
 end
 
-dave = Person.new id: 21, name: "Dave", age: 32 # => #<Person:0x007feaf4a3c668 @id=21, @name="Dave", @age=32>
-dave.id   # => 21
-dave.name # => "Dave"
-dave.age  # => 32
+describe Person do
+  it { is_expected.to have_attribute(:name) }
+  it { is_expected.to have_attribute(:age) }
+  it { is_expected.to have_attribute(:status) }
 
-another_dave = Person.new id: 21
-dave == another_dave # => true
-```
+  it { is_expected.to have_attribute(:name).read_write }
+  it { is_expected.to have_attribute(:age).read_only }
+  it { is_expected.to have_attribute(:status).write_only }
 
-### Custom Classes
-You can create your own classes and use Pad attributes.
+  it { is_expected.to have_attribute(:address).with_reader(:protected) }
+  it { is_expected.to have_attribute(:address).with_writer(:protected) }
 
-```ruby
-require 'pad'
-
-class Vehicle
-  include Pad.model
-
-  attribute :year
-  attribute :manufacturer
-  attribute :make
+  it { is_expected.to have_attribute(:ssn).with_reader(:private) }
+  it { is_expected.to have_attribute(:ssn).with_writer(:private) }
 end
-
-sienna = Vehicle.new year: 2006, manufacturer: 'Toyota', make: 'Sienna' # => #<Vehicle:0x007fcdacd2ff38 @year=2006, @manufacturer="Toyota", @make="Sienna">
-sienna.year # => 2006
-sienna.year = 2007
-sienna  # => #<Vehicle:0x007fcdacd2ff38 @year=2007, @manufacturer="Toyota", @make="Sienna">
 ```
 
 ## Contributing
