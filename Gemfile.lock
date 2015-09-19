@@ -18,7 +18,7 @@ GEM
       term-ansicolor (= 1.2.2)
       thor (= 0.18.1)
     diff-lcs (1.2.5)
-    docile (1.1.5)
+    docile
     mime-types (2.4.3)
     multi_json (1.10.1)
     parser (2.2.2.6)
