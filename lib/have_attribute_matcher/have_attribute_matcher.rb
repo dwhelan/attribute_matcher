@@ -44,8 +44,8 @@ module RSpec
         class << self
           def failure_messages(&block)
             define_method :failure_message do
-              messages = instance_eval(&block).compact.join(' and ')
-              messages.empty? ? super() : format('expected %s to %s but %s', actual, description, messages)
+              failures = instance_eval(&block).compact.join(' and ')
+              [super(), failures].join(' but ')
             end
           end
         end
