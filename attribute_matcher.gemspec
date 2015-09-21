@@ -2,16 +2,16 @@
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
-require 'have_attribute_matcher/version'
+require 'attribute_matcher/version'
 
 Gem::Specification.new do |gem|
-  gem.name          = 'have_attribute_matcher'
+  gem.name          = 'attribute_matcher'
   gem.version       = HaveAttributeMatcher::VERSION
   gem.authors       = ['Declan Whelan']
   gem.email         = ['declan@pleanintuit.com']
   gem.summary       = 'A matcher for testing object attributes.'
   gem.description   = 'A matcher for testing object attributes.'
-  gem.homepage      = 'https://github.com/dwhelan/have_attribute_matcher'
+  gem.homepage      = 'https://github.com/dwhelan/attribute_matcher'
   gem.license       = 'MIT'
 
   gem.files         = `git ls-files -z`.split("\x0")
@@ -26,4 +26,5 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'rspec',                     '~>  3.0'
   gem.add_development_dependency 'rspec-its',                 '~>  1.2'
   gem.add_development_dependency 'rubocop',                   '~>  0.30'
+  gem.add_development_dependency 'simplecov',                 '~>  0.9'
 end

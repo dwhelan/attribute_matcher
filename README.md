@@ -1,9 +1,8 @@
-[![Gem Version](https://badge.fury.io/rb/have_attribute_matcher.png)](http://badge.fury.io/rb/have_attribute_matcher)
-[![Build Status](https://travis-ci.org/dwhelan/have_attribute_matcher.png?branch=master)](https://travis-ci.org/dwhelan/have_attribute_matcher)
-[![Code Climate](https://codeclimate.com/github/dwhelan/have_attribute_matcher/badges/gpa.svg)](https://codeclimate.com/github/dwhelan/have_attribute_matcher)
-[![Test Coverage](https://codeclimate.com/github/dwhelan/have_attribute_matcher/badges/coverage.svg)](https://codeclimate.com/github/dwhelan/have_attribute_matcher/coverage)
+[![Gem Version](https://badge.fury.io/rb/attribute_matcher.png)](http://badge.fury.io/rb/attribute_matcher)
+[![Build Status](https://travis-ci.org/dwhelan/attribute_matcher.png?branch=master)](https://travis-ci.org/dwhelan/attribute_matcher)
+[![Code Climate](https://codeclimate.com/github/dwhelan/attribute_matcher/badges/gpa.svg)](https://codeclimate.com/github/dwhelan/attribute_matcher)
 
-# Have Attribute Matcher
+# Attribute Matcher
 
 An RSpec matcher for validating attributes.
 
@@ -12,7 +11,7 @@ An RSpec matcher for validating attributes.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'have_attribute_matcher'
+gem 'attribute_matcher'
 ```
 
 And then execute:
@@ -21,7 +20,7 @@ And then execute:
 
 Or install it yourself as:
 
-  $ gem install have_attribute_matcher
+  $ gem install attribute_matcher
 
 ## Usage
 
@@ -59,7 +58,7 @@ end
 
 ## Contributing
 
-1. Fork it ( https://github.com/dwhelan/have_attribute_matcher/fork )
+1. Fork it ( https://github.com/dwhelan/attribute_matcher/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
