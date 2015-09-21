@@ -23,4 +23,4 @@ RSpec.configure do |config|
   end
 end
 
-require 'have_attribute_matcher'
+require 'attribute_matcher'

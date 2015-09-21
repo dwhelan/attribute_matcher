@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    have_attribute_matcher (0.0.1)
+    attribute_matcher (0.0.1)
 
 GEM
   remote: https://rubygems.org/
@@ -75,14 +75,15 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  attribute_matcher!
   bundler (~> 1.7)
   codeclimate-test-reporter (~> 0.4)
   coveralls (~> 0.8)
-  have_attribute_matcher!
   rake (~> 10.0)
   rspec (~> 3.0)
   rspec-its (~> 1.2)
   rubocop (~> 0.30)
+  simplecov (~> 0.9)
 
 BUNDLED WITH
    1.10.6
