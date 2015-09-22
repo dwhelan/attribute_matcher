@@ -1,7 +1,7 @@
 [![Gem Version](https://badge.fury.io/rb/attribute_matcher.png)](http://badge.fury.io/rb/attribute_matcher)
 [![Build Status](https://travis-ci.org/dwhelan/attribute_matcher.png?branch=master)](https://travis-ci.org/dwhelan/attribute_matcher)
 [![Code Climate](https://codeclimate.com/github/dwhelan/attribute_matcher/badges/gpa.svg)](https://codeclimate.com/github/dwhelan/attribute_matcher)
-[![Coverage Status](https://coveralls.io/repos/dwhelan/attribute_matcher/badge.png)](https://coveralls.io/r/dwhelan/attribute_matcher)
+[![Coverage Status](https://coveralls.io/repos/dwhelan/attribute_matcher/badge.svg?branch=master&service=github)](https://coveralls.io/github/dwhelan/attribute_matcher?branch=master)
 
 # Attribute Matcher
 

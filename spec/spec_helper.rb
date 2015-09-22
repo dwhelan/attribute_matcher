@@ -9,7 +9,7 @@ SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
 ]
 SimpleCov.start
 
-Coveralls.wear!
+Coveralls.wear! if Coveralls.will_run?
 
 RSpec.configure do |config|
   config.color = true
