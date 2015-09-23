@@ -165,4 +165,20 @@ describe 'have_attribute matcher' do
       end
     end
   end
+
+  describe 'with_value' do
+    let(:klass) do
+      Class.new do
+        def initialize
+          @name = 'John'
+        end
+
+        attr_reader :name
+        attr_reader :address
+      end
+    end
+
+    it { is_expected.to have_attribute(:name).with_value('John') }
+    it { is_expected.not_to have_attribute(:name).with_value(nil) }
+  end
 end

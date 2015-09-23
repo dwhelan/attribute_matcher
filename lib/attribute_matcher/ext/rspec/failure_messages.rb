@@ -7,7 +7,7 @@ module RSpec
           def failure_messages(&block)
             define_method :failure_message do
               failures = instance_eval(&block).compact.join(' and ')
-              [super(), failures].join(' but ')
+              [super(), failures].reject(&:empty?).join(' but ')
             end
           end
         end

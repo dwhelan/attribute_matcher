@@ -1,14 +1,17 @@
 RSpec::Matchers.define(:have_attribute) do
   match do
-    exists? && access_match? && visibility_match?(:reader) && visibility_match?(:writer)
+    exists? && access_match? && visibility_match?(:reader) && visibility_match?(:writer) && value_match?
   end
 
   chain_group :access, :read_only, :write_only, :read_write
 
   chain(:with_reader) { |visibility| @reader_visibility = ensure_valid_visibility(visibility) }
   chain(:with_writer) { |visibility| @writer_visibility = ensure_valid_visibility(visibility) }
+  chain(:with_value)  { |value|      @value             = value; @value_set = true }
 
   private
+
+  attr_reader :value, :value_set
 
   def exists?
     reader || writer
@@ -84,5 +87,9 @@ RSpec::Matchers.define(:have_attribute) do
   def ensure_valid_visibility(visibility)
     fail format('%s is an invalid visibility; should be one of %s', visibility, VALID_VISIBILITIES.join(', ')) unless VALID_VISIBILITIES.include?(visibility)
     visibility
+  end
+
+  def value_match?
+    value_set && actual.send(expected).eql?(value)
   end
 end
