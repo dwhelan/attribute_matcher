@@ -5,13 +5,17 @@ RSpec::Matchers.define(:have_attribute) do
 
   chain_group :access, :read_only, :write_only, :read_write
 
-  chain(:with_reader) { |visibility| @reader_visibility = ensure_valid_visibility(visibility) }
-  chain(:with_writer) { |visibility| @writer_visibility = ensure_valid_visibility(visibility) }
-  chain(:with_value)  { |value|      @value             = value; @value_set = true }
+  chain(:with_reader) { |visibility| self.reader_visibility = ensure_valid_visibility(visibility) }
+  chain(:with_writer) { |visibility| self.writer_visibility = ensure_valid_visibility(visibility) }
+
+  chain(:with_value) do |value|
+    self.value     = value
+    self.value_set = true
+  end
 
   private
 
-  attr_reader :value, :value_set
+  attr_accessor :value, :value_set, :reader_visibility, :writer_visibility
 
   def exists?
     reader || writer
@@ -64,7 +68,7 @@ RSpec::Matchers.define(:have_attribute) do
 
   def visibility_match?(accessor)
     method = accessor == :reader ? reader : writer
-    expected_visibility = instance_variable_get(:"@#{accessor}_visibility")
+    expected_visibility = send("#{accessor}_visibility")
 
     method.nil? || expected_visibility.nil? || expected_visibility == visibility(method)
   end
