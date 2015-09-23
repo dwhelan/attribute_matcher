@@ -90,6 +90,6 @@ RSpec::Matchers.define(:have_attribute) do
   end
 
   def value_match?
-    value_set && actual.send(expected).eql?(value)
+    value_set.nil? || actual.send(expected).eql?(value)
   end
 end
