@@ -178,7 +178,25 @@ describe 'have_attribute matcher' do
       end
     end
 
+    it { is_expected.to have_attribute(:name) }
     it { is_expected.to have_attribute(:name).with_value('John') }
     it { is_expected.not_to have_attribute(:name).with_value(nil) }
+
+    it { is_expected.to have_attribute(:address) }
+    it { is_expected.to have_attribute(:address).with_value(nil) }
+    it { is_expected.not_to have_attribute(:address).with_value('123 Main St') }
+
+    it_behaves_like 'matcher messages' do
+      {
+        :'have_attribute(:name).with_value("John")' => 'have attribute :name with value "John"',
+        :'have_attribute(:name).with_value(nil)'    => 'have attribute :name with value nil',
+      }.each do |expectation, expected_description|
+        describe(expectation) do
+          its(:description)                  { is_expected.to eql expected_description }
+          its(:failure_message)              { is_expected.to match /expected .+ to #{expected_description}/ }
+          its(:failure_message_when_negated) { is_expected.to match /expected .+ not to #{expected_description}/ }
+        end
+      end
+    end
   end
 end
