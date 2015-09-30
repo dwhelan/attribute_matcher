@@ -29,4 +29,5 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'rubocop',                 '~>  0.30'
   gem.add_development_dependency 'simplecov',               '~>  0.9'
   gem.add_development_dependency 'terminal-notifier-guard', '~>  1.6'
+  gem.add_development_dependency 'virtus',                  '~>  1.0'
 end
