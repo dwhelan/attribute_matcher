@@ -21,3 +21,6 @@ Style/SingleSpaceBeforeFirstArg:
 
 Style/Documentation:
   Enabled: false
+
+Style/Semicolon:
+  Enabled: false

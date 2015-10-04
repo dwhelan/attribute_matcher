@@ -1,17 +1,18 @@
 RSpec::Matchers.define(:have_attribute) do
   match do
-    exists? && access_match? && visibility_match?(:reader) && visibility_match?(:writer) && value_match?
+    exists? && access_match? && visibility_match?(:reader) && visibility_match?(:writer) && value_match? && type_match?
   end
 
   chain_group :access, :read_only, :write_only, :read_write
 
   chain(:with_reader) { |visibility| @reader_visibility = ensure_valid_visibility(visibility) }
   chain(:with_writer) { |visibility| @writer_visibility = ensure_valid_visibility(visibility) }
-  chain(:with_value)  { |value|      @value             = value; @value_set = true }
+  chain(:with_value)  { |value|      self.value         = value; self.value_set = true }
+  chain(:of_type)     { |type|       self.type          = type;  self.type_set  = true }
 
   private
 
-  attr_reader :value, :value_set
+  attr_accessor :value, :value_set, :type, :type_set
 
   def exists?
     reader || writer
@@ -90,6 +91,10 @@ RSpec::Matchers.define(:have_attribute) do
   end
 
   def value_match?
-    value_set && actual.send(expected).eql?(value)
+    value_set.nil? || actual.send(expected).eql?(value)
+  end
+
+  def type_match?
+    type_set.nil? || actual.send(expected).class.eql?(type)
   end
 end

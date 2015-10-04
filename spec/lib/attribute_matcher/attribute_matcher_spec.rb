@@ -181,4 +181,19 @@ describe 'have_attribute matcher' do
     it { is_expected.to have_attribute(:name).with_value('John') }
     it { is_expected.not_to have_attribute(:name).with_value(nil) }
   end
+
+  describe 'of_type' do
+    let(:klass) do
+      Class.new do
+        def initialize
+          @name = 'John'
+        end
+
+        attr_reader :name
+      end
+    end
+
+    it { is_expected.to have_attribute(:name).of_type(String) }
+    it { is_expected.not_to have_attribute(:name).of_type(Integer) }
+  end
 end
