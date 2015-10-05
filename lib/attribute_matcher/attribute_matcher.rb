@@ -1,18 +1,63 @@
+module RSpec
+  module Matchers
+    module DSL
+      class Matcher
+        class << self
+          def chain_value(value, &actual_definition)
+            attr_accessor "expected_#{value}", :"expected_#{value}_set"
+
+            chain(value) do |expected_value|
+              send(:"expected_#{value}=",     expected_value)
+              send(:"expected_#{value}_set=", true)
+            end
+
+            define_method "#{value}_match?" do
+              send(:"expected_#{value}_set").nil? || send(:"expected_#{value}").eql?(instance_eval(&actual_definition))
+            end
+
+            # TBD
+            # if chained_values.nil?
+            #   self.chained_values = ["#{value}_match?"]
+            #
+            #   define_method(:matches?) do |foo|
+            #     super() && chained_values.map{|m| send(m)}.all?
+            #   end
+            # else
+            #   chained_values << "#{value}_match?"
+            # end
+          end
+
+          private
+
+          attr_accessor :chained_values
+        end
+      end
+    end
+  end
+end
+
 RSpec::Matchers.define(:have_attribute) do
   match do
-    exists? && access_match? && visibility_match?(:reader) && visibility_match?(:writer) && value_match? && type_match?
+    exists? && access_match? && visibility_match?(:reader) && visibility_match?(:writer) && with_value_match? && of_type_match?
   end
 
   chain_group :access, :read_only, :write_only, :read_write
 
-  chain(:with_reader) { |visibility| @reader_visibility = ensure_valid_visibility(visibility) }
-  chain(:with_writer) { |visibility| @writer_visibility = ensure_valid_visibility(visibility) }
-  chain(:with_value)  { |value|      self.value         = value; self.value_set = true }
-  chain(:of_type)     { |type|       self.type          = type;  self.type_set  = true }
+  chain(:with_reader) { |visibility| self.reader_visibility = ensure_valid_visibility(visibility) }
+  chain(:with_writer) { |visibility| self.writer_visibility = ensure_valid_visibility(visibility) }
+  # chain(:with_value)  { |value|      self.value             = value; self.value_set = true }
+  # chain(:of_type)     { |type|       self.type              = type;  self.type_set  = true }
+
+  chain_value('with_value') { attribute_value }
+  chain_value('of_type')    { attribute_value.class }
 
   private
 
-  attr_accessor :value, :value_set, :type, :type_set
+  attr_accessor :reader_visibility, :writer_visibility#, :value, :value_set, :type, :type_set
+
+  def attribute_value
+    actual.send(expected)
+  end
 
   def exists?
     reader || writer
@@ -90,11 +135,11 @@ RSpec::Matchers.define(:have_attribute) do
     visibility
   end
 
-  def value_match?
-    value_set.nil? || actual.send(expected).eql?(value)
-  end
-
-  def type_match?
-    type_set.nil? || actual.send(expected).class.eql?(type)
-  end
+  # def value_match?
+  #   value_set.nil? || actual.send(expected).eql?(value)
+  # end
+  #
+  # def type_match?
+  #   type_set.nil? || actual.send(expected).class.eql?(type)
+  # end
 end
