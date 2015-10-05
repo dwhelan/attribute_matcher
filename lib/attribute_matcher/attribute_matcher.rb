@@ -53,7 +53,7 @@ RSpec::Matchers.define(:have_attribute) do
 
   private
 
-  attr_accessor :reader_visibility, :writer_visibility#, :value, :value_set, :type, :type_set
+  attr_accessor :reader_visibility, :writer_visibility # , :value, :value_set, :type, :type_set
 
   def attribute_value
     actual.send(expected)
