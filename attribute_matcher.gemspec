@@ -19,11 +19,15 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ['lib']
 
-  gem.add_development_dependency 'bundler',                   '~>  1.7'
-  gem.add_development_dependency 'coveralls',                 '~>  0.8'
-  gem.add_development_dependency 'rake',                      '~> 10.0'
-  gem.add_development_dependency 'rspec',                     '~>  3.0'
-  gem.add_development_dependency 'rspec-its',                 '~>  1.2'
-  gem.add_development_dependency 'rubocop',                   '~>  0.30'
-  gem.add_development_dependency 'simplecov',                 '~>  0.9'
+  gem.add_development_dependency 'bundler',                 '~>  1.7'
+  gem.add_development_dependency 'coveralls',               '~>  0.8'
+  gem.add_development_dependency 'guard',                   '~>  2.13'
+  gem.add_development_dependency 'guard-rspec',             '~>  4.6'
+  gem.add_development_dependency 'rake',                    '~> 10.0'
+  gem.add_development_dependency 'rspec',                   '~>  3.0'
+  gem.add_development_dependency 'rspec-its',               '~>  1.2'
+  gem.add_development_dependency 'rubocop',                 '~>  0.30'
+  gem.add_development_dependency 'simplecov',               '~>  0.9'
+  gem.add_development_dependency 'terminal-notifier-guard', '~>  1.6'
+  gem.add_development_dependency 'virtus',                  '~>  1.0'
 end

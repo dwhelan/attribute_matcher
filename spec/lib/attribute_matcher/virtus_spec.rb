@@ -1,33 +1,25 @@
 require 'spec_helper'
+require 'virtus'
 
-class Person
-  attr_accessor :name
-  attr_reader   :age
-  attr_writer   :status
+class VirtusPerson
+  include Virtus.model
+
+  attribute :name
+  attribute :age
+  attribute :status
+
+  attribute :ssn,     String, reader: :private,   writer: :private
+  attribute :address, String, reader: :protected, writer: :protected
 
   def initialize
     self.name = 'Joe'
   end
-
-  protected
-
-  attr_accessor :address
-
-  private
-
-  attr_accessor :ssn
 end
 
-describe Person do
+describe VirtusPerson do
   it { is_expected.to have_attribute(:name)   }
   it { is_expected.to have_attribute(:age)    }
   it { is_expected.to have_attribute(:status) }
-
-  describe 'accessors' do
-    it { is_expected.to have_attribute(:name).read_write   }
-    it { is_expected.to have_attribute(:age).read_only     }
-    it { is_expected.to have_attribute(:status).write_only }
-  end
 
   describe 'visibility' do
     it { is_expected.to have_attribute(:address).with_reader(:protected) }
