@@ -1,10 +1,10 @@
 RSpec::Matchers.define(:have_attribute) do
   match do
-    exists? && visibility_match?(:reader) && visibility_match?(:writer) && all_values_match?
+    exists? && all_values_match?
   end
 
-  chain(:with_reader) { |visibility| self.reader_visibility = visibility }
-  chain(:with_writer) { |visibility| self.writer_visibility = visibility }
+  chain_value('with_reader') { |expected_value| ensure_valid_visibility(expected_value); visibility(reader) }
+  chain_value('with_writer') { |expected_value| ensure_valid_visibility(expected_value); visibility(writer) }
 
   chain_value('with_value') { attribute_value }
   chain_value('of_type')    { attribute_value.class }
@@ -14,8 +14,6 @@ RSpec::Matchers.define(:have_attribute) do
   chain_value('write_only') { !reader_ok? &&  writer_ok? }
 
   private
-
-  attr_accessor :reader_visibility, :writer_visibility
 
   def attribute_value
     actual.send(expected)
@@ -58,16 +56,6 @@ RSpec::Matchers.define(:have_attribute) do
     format('%s() takes %d argument%s instead of %d', method.name, method.arity, method.arity == 1 ? '' : 's', expected_arity) if method && method.arity != expected_arity
   end
 
-  def visibility_match?(accessor)
-    method = accessor == :reader ? reader : writer
-    expected_visibility = instance_variable_get(:"@#{accessor}_visibility")
-
-    return true if method.nil? || expected_visibility.nil?
-
-    ensure_valid_visibility(expected_visibility)
-    expected_visibility == visibility(method)
-  end
-
   def visibility(method)
     klass = method.receiver.class
 
@@ -85,6 +73,5 @@ RSpec::Matchers.define(:have_attribute) do
 
   def ensure_valid_visibility(visibility)
     fail format('%s is an invalid visibility; should be one of %s', visibility, VALID_VISIBILITIES.join(', ')) unless VALID_VISIBILITIES.include?(visibility)
-    visibility
   end
 end

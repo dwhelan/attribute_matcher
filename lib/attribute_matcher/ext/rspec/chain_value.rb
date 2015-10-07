@@ -1,3 +1,4 @@
+# An RSpec extension for chained methods that check single values
 module RSpec
   module Matchers
     module DSL
@@ -33,7 +34,7 @@ module RSpec
 
           def create_value_match_method(value, actual_definition)
             define_method :"#{value}_match?" do
-              send(:"expected_#{value}_set").nil? || send(:"expected_#{value}").eql?(instance_eval(&actual_definition))
+              send(:"expected_#{value}_set").nil? || send(:"expected_#{value}").eql?(instance_exec(send(:"expected_#{value}"), &actual_definition))
             end
           end
         end
