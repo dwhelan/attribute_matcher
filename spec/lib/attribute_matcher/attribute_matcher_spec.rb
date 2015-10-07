@@ -154,13 +154,13 @@ describe 'have_attribute matcher' do
     end
 
     it 'should fail if the reader visibility is invalid' do
-      expect { have_attribute(:private_reader).with_reader(:foo) }.to raise_error do |error|
+      expect { should have_attribute(:private_reader).with_reader(:foo) }.to raise_error do |error|
         expect(error.message).to match /foo is an invalid visibility; should be one of private, protected, public/
       end
     end
 
     it 'should fail if the write visibility is invalid' do
-      expect { have_attribute(:private_writer).with_writer(:foo) }.to raise_error do |error|
+      expect { should have_attribute(:private_writer).with_writer(:foo) }.to raise_error do |error|
         expect(error.message).to match /foo is an invalid visibility; should be one of private, protected, public/
       end
     end

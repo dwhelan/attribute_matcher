@@ -24,3 +24,7 @@ Style/Documentation:
 
 Style/Semicolon:
   Enabled: false
+
+Style/SpaceAroundOperators:
+  Enabled: false
+
