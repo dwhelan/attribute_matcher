@@ -40,4 +40,8 @@ describe Person do
     it { is_expected.to have_attribute(:name).with_value('Joe') }
     it { is_expected.to have_attribute(:age).with_value(nil)    }
   end
+
+  describe 'type' do
+    it { is_expected.to have_attribute(:name).of_type(String) }
+  end
 end

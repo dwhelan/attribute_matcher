@@ -70,6 +70,10 @@ describe Person do
     it { is_expected.to have_attribute(:name).with_value('Joe') }
     it { is_expected.to have_attribute(:age).with_value(nil)    }
   end
+
+  describe 'type' do
+    it { is_expected.to have_attribute(:name).of_type(String) }
+  end
 end
 ```
 
@@ -81,7 +85,7 @@ require 'virtus'
 class VirtusPerson
   include Virtus.model
 
-  attribute :name
+  attribute :name, String
   attribute :age
   attribute :status
 
@@ -91,7 +95,6 @@ class VirtusPerson
   def initialize
     self.name = 'Joe'
   end
-
 end
 
 describe VirtusPerson do
@@ -109,6 +112,10 @@ describe VirtusPerson do
   describe 'values' do
     it { is_expected.to have_attribute(:name).with_value('Joe') }
     it { is_expected.to have_attribute(:age).with_value(nil)    }
+  end
+
+  describe 'type' do
+    it { is_expected.to have_attribute(:name).of_type(String) }
   end
 end
 ```

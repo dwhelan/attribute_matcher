@@ -6,12 +6,12 @@ RSpec::Matchers.define(:have_attribute) do
   chain_value('with_reader') { |expected_value| ensure_valid_visibility(expected_value); visibility(reader) }
   chain_value('with_writer') { |expected_value| ensure_valid_visibility(expected_value); visibility(writer) }
 
-  chain_value('with_value') { attribute_value }
-  chain_value('of_type')    { attribute_value.class }
-
   chain_value('read_write') {  reader_ok? &&  writer_ok? }
   chain_value('read_only')  {  reader_ok? && !writer_ok? }
   chain_value('write_only') { !reader_ok? &&  writer_ok? }
+
+  chain_value('with_value') { attribute_value }
+  chain_value('of_type')    { attribute_value.class }
 
   private
 
