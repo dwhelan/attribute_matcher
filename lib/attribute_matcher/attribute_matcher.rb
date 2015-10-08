@@ -11,12 +11,17 @@ RSpec::Matchers.define(:have_attribute) do
   chain_value('write_only') { !reader_ok? &&  writer_ok? }
 
   chain_value('with_value') { attribute_value }
-  chain_value('of_type')    { attribute_value.class }
+  chain_value('of_type')    { attribute_type }
 
   private
 
   def attribute_value
     actual.send(expected)
+  end
+
+  def attribute_type
+    return attribute_value.class if attribute_value
+    actual.send(:attribute_set)[expected].primitive if actual.respond_to?(:attribute_set, true)
   end
 
   def exists?

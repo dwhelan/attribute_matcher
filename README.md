@@ -85,16 +85,12 @@ require 'virtus'
 class VirtusPerson
   include Virtus.model
 
-  attribute :name, String
+  attribute :name, String, default: 'Joe'
   attribute :age
   attribute :status
 
   attribute :ssn,     String, reader: :private,   writer: :private
   attribute :address, String, reader: :protected, writer: :protected
-
-  def initialize
-    self.name = 'Joe'
-  end
 end
 
 describe VirtusPerson do
